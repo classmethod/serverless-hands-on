@@ -12,7 +12,10 @@ extra:
 markdown_extensions:
   - fontawesome_markdown
   - admonition
+  - codehilite
 site_dir: ../docs
 nav:
   - 環境構築:
       setup/cloud9.md
+  - 課題:
+      - 1. サンプルアプリケーションのデプロイ: task/sample-app/README.md

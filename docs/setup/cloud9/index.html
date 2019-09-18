@@ -219,8 +219,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cloud9-workspace" class="md-nav__link">
-    Cloud9 Workspaceの作成
+  <a href="#cloud9-environment" class="md-nav__link">
+    Cloud9 Environmentの作成
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python3" class="md-nav__link">
+    Python3のデフォルト設定
   </a>
   
 </li>
@@ -233,6 +240,42 @@
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      課題
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        課題
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../task/sample-app/" title="1. サンプルアプリケーションのデプロイ" class="md-nav__link">
+      1. サンプルアプリケーションのデプロイ
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -271,8 +314,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cloud9-workspace" class="md-nav__link">
-    Cloud9 Workspaceの作成
+  <a href="#cloud9-environment" class="md-nav__link">
+    Cloud9 Environmentの作成
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python3" class="md-nav__link">
+    Python3のデフォルト設定
   </a>
   
 </li>
@@ -309,7 +359,7 @@ AWS CLIとAWS SAM CLIなどAWSを使った開発に必要なツールや基本�
 </ul>
 <p>弊社で実績はありませんが､実際にプロダクトで使用されている例はあります｡  </p>
 <p><a href="https://speakerdeck.com/marumoto/jaws-days2018?slide=75" target="_blank">ユーザー企業におけるサーバレスシステムへの移行/JAWS DAYS2018 <i class="fa fa-external-link"></i> </a> </p>
-<h2 id="cloud9-workspace">Cloud9 Workspaceの作成</h2>
+<h2 id="cloud9-environment">Cloud9 Environmentの作成</h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>マネジメントコンソールの右上で､
@@ -345,6 +395,50 @@ AWS CLIとAWS SAM CLIなどAWSを使った開発に必要なツールや基本�
 <p>Cloud9を開いているウィンドウを閉じてしまった場合は､再度<a href="https://ap-northeast-1.console.aws.amazon.com/cloud9/home/product" target="_blank">AWS Cloud9 <i class="fa fa-external-link"></i> </a>を開き､
 <strong>sls-hands-on</strong>の<strong>Open IDE</strong>を選択します｡</p>
 </div>
+<h2 id="python3">Python3のデフォルト設定</h2>
+<p>Cloud9(Amazon Linux)では､Python3系がデフォルトになっていますが､pipはPython2系になっています｡  </p>
+<p>2019/09/18時点の確認</p>
+<div class="codehilite"><pre><span></span><span class="n">python</span> <span class="c1">--version</span>
+<span class="o">#</span> <span class="n">Python</span> <span class="mi">3</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">8</span>
+<span class="n">pip</span> <span class="c1">--version</span>
+<span class="o">#</span> <span class="n">pip</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">3</span> <span class="k">from</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="n">python</span> <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+
+
+<p>ハンズオンではPython3系を使用するので､設定を変更します｡  </p>
+<ol>
+<li>下記のコマンドを実行します｡  </li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="n">sudo</span> <span class="k">update</span><span class="o">-</span><span class="n">alternatives</span> <span class="c1">--config python</span>
+</pre></div>
+
+
+<ol>
+<li>Python3系を選択します｡(下記の場合は2)</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="n">There</span> <span class="k">are</span> <span class="mi">2</span> <span class="n">programs</span> <span class="n">which</span> <span class="n">provide</span> <span class="s1">&#39;python&#39;</span><span class="p">.</span>
+
+  <span class="n">Selection</span>    <span class="n">Command</span>
+<span class="c1">-----------------------------------------------</span>
+<span class="o">*+</span> <span class="mi">1</span>           <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python2</span><span class="p">.</span><span class="mi">7</span>
+   <span class="mi">2</span>           <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">python3</span><span class="p">.</span><span class="mi">6</span>
+
+<span class="n">Enter</span> <span class="k">to</span> <span class="n">keep</span> <span class="n">the</span> <span class="k">current</span> <span class="n">selection</span><span class="p">[</span><span class="o">+</span><span class="p">],</span> <span class="k">or</span> <span class="k">type</span> <span class="n">selection</span> <span class="nb">number</span><span class="p">:</span> <span class="mi">2</span>
+</pre></div>
+
+
+<ol>
+<li>バージョンがPython3系になっている事を確認します｡</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="n">python</span> <span class="c1">--version</span>
+<span class="n">pip</span> <span class="c1">--version</span>
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span><span class="n">Python</span> <span class="mi">3</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">8</span>
+<span class="n">pip</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">3</span> <span class="k">from</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="n">python</span> <span class="mi">3</span><span class="p">.</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
                 
                   
                 
@@ -361,6 +455,27 @@ AWS CLIとAWS SAM CLIなどAWSを使った開発に必要なツールや基本�
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="../../task/sample-app/" title="1. サンプルアプリケーションのデプロイ" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1. サンプルアプリケーションのデプロイ
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

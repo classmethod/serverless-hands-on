@@ -19,7 +19,7 @@ AWS CLIとAWS SAM CLIなどAWSを使った開発に必要なツールや基本�
 
 <a href="https://speakerdeck.com/marumoto/jaws-days2018?slide=75" target="_blank">ユーザー企業におけるサーバレスシステムへの移行/JAWS DAYS2018 :fa-external-link: </a>	
 
-## Cloud9 Workspaceの作成
+## Cloud9 Environmentの作成
 
 !!! Warning
     マネジメントコンソールの右上で､
@@ -47,3 +47,44 @@ AWS CLIとAWS SAM CLIなどAWSを使った開発に必要なツールや基本�
 !!! Info
     Cloud9を開いているウィンドウを閉じてしまった場合は､再度<a href="https://ap-northeast-1.console.aws.amazon.com/cloud9/home/product" target="_blank">AWS Cloud9 :fa-external-link: </a>を開き､
     **sls-hands-on**の**Open IDE**を選択します｡
+    
+## Python3のデフォルト設定
+
+Cloud9(Amazon Linux)では､Python3系がデフォルトになっていますが､pipはPython2系になっています｡  
+
+2019/09/18時点の確認
+```
+python --version
+# Python 3.6.8
+pip --version
+# pip 9.0.3 from /usr/lib/python2.7/dist-packages (python 2.7)
+```
+
+ハンズオンではPython3系を使用するので､設定を変更します｡  
+
+
+1. 下記のコマンドを実行します｡  
+```
+sudo update-alternatives --config python
+```
+1. Python3系を選択します｡(下記の場合は2)
+```
+There are 2 programs which provide 'python'.
+
+  Selection    Command
+-----------------------------------------------
+*+ 1           /usr/bin/python2.7
+   2           /usr/bin/python3.6
+
+Enter to keep the current selection[+], or type selection number: 2
+```
+1. バージョンがPython3系になっている事を確認します｡
+```
+python --version
+pip --version
+```
+(例)
+```
+Python 3.6.8
+pip 9.0.3 from /usr/lib/python3.6/dist-packages (python 3.6)
+```
