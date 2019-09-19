@@ -88,3 +88,31 @@ pip --version
 Python 3.6.8
 pip 9.0.3 from /usr/lib/python3.6/dist-packages (python 3.6)
 ```
+
+## AWSリージョンの設定
+
+ハンズオンではAWS CLIを使い､コマンドラインでAWSを操作します｡  
+利用するAWSリージョンを指定する為に､環境変数を設定します｡  
+
+```bash
+echo 'AWS_DEFAULT_REGION="ap-northeast-1"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+設定を確認します｡  
+```bash
+echo ${AWS_DEFAULT_REGION}
+aws ec2 describe-instances --query \
+    'sort_by(Reservations[].Instances[].{Tags:Tags[?Key==`Name`].Value|[0],InstanceType:InstanceType,State:State.Name},&Tags)' --output table
+```
+(例)
+```text
+ap-northeast-1
+-----------------------------------------------------------------------------------------
+|                                   DescribeInstances                                   |
++--------------+----------+-------------------------------------------------------------+
+| InstanceType |  State   |                            Tags                             |
++--------------+----------+-------------------------------------------------------------+
+|  t2.micro    |  running |  aws-cloud9-sls-hands-on-[Random alphanumeric]              |
++--------------+----------+-------------------------------------------------------------+
+```
