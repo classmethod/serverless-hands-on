@@ -334,8 +334,43 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    テストの実行
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    デプロイ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API実行
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    削除
+  </a>
   
 </li>
       
@@ -472,8 +507,43 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    テストの実行
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    デプロイ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API実行
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    削除
+  </a>
   
 </li>
       
@@ -497,23 +567,17 @@
                 <h1 id="_1">サンプルアプリケーションのデプロイ</h1>
 <p>この課題ではサンプルのアプリケーションのコードを確認し､デプロイを行います｡  </p>
 <h2 id="_2">サンプルアプリケーションの取得</h2>
-<ol>
-<li>作業ディレクトリに移動します｡</li>
-</ol>
+<p>作業ディレクトリに移動します｡</p>
 <div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment
 </pre></div>
 
 
-<ol>
-<li>サンプルアプリケーションを取得します｡</li>
-</ol>
+<p>サンプルアプリケーションを取得します｡</p>
 <div class="codehilite"><pre><span></span>sam init -r python3.6
 </pre></div>
 
 
-<ol>
-<li>取得できていることを確認します｡</li>
-</ol>
+<p>取得できていることを確認します｡</p>
 <div class="codehilite"><pre><span></span>ls sam-app
 </pre></div>
 
@@ -526,19 +590,19 @@
 <h2 id="_3">ディレクトリ構成</h2>
 <p>サンプルアプリケーションの構成は下記の様になっています｡  </p>
 <div class="codehilite"><pre><span></span>sam-app/
-├── hello_world                     <span class="c1"># アプリケーションディレクトリ</span>
-│   ├── app.py                      <span class="c1"># Lambda関数</span>
+├── hello_world                     # アプリケーションディレクトリ
+│   ├── app.py                      # Lambda関数
 │   ├── app.pyc
 │   ├── __init__.py
 │   ├── __init__.pyc
-│   └── requirements.txt            <span class="c1"># ライブラリ定義</span>
-├── README.md                       <span class="c1"># 説明</span>
-├── template.yaml                   <span class="c1"># SAMテンプレート(AWSの構成情報)</span>
-└── tests                           <span class="c1"># テストディレクトリ</span>
-    └── unit                        <span class="c1"># ユニットテストディレクトリ</span>
+│   └── requirements.txt            # ライブラリ定義
+├── README.md                       # 説明
+├── template.yaml                   # SAMテンプレート(AWSの構成情報)
+└── tests                           # テストディレクトリ
+    └── unit                        # ユニットテストディレクトリ
         ├── __init__.py
         ├── __init__.pyc
-        ├── test_handler.py         <span class="c1"># Lambda関数のテストコード</span>
+        ├── test_handler.py         # Lambda関数のテストコード
         └── test_handler.pyc
 </pre></div>
 
@@ -568,9 +632,9 @@
 
 
 <h3 id="lambda">Lambdaハンドラー</h3>
-<p>Lambda関数は作成する際に､ハンドラーを指定します。これはコードを実行する際に､AWS Lambdaがどの関数を呼び出すかの宣言です。 
-<!-- TODO: Lambdaハンドラーのスクリーンショット -->
-引数は下記の通りです｡  </p>
+<p>Lambda関数は作成する際に､ハンドラーを指定します。これはコードを実行する際に､AWS Lambdaがどの関数を呼び出すかの宣言です。 </p>
+<p><img alt="" src="img/002.png" /></p>
+<p>引数は下記の通りです｡  </p>
 <ul>
 <li>event: 呼び出し元から受け取るイベントデータです｡このパラメータは通常､Pythonのdict型です｡
 呼び出し元により､構成は異なります｡</li>
@@ -667,8 +731,8 @@ SAMはCloudFormationに変換してからAWSにデプロイします｡(AWS上�
             <span class="nt">Method</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">get</span>
       <span class="nt">Description</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
       <span class="nt">MemorySize</span><span class="p">:</span> <span class="s">&#39;&#39;</span>
-<span class="nt">Outputs</span><span class="p">:</span>
-  <span class="nt">HelloWorldApi</span><span class="p">:</span>
+<span class="hll"><span class="nt">Outputs</span><span class="p">:</span>
+</span>  <span class="nt">HelloWorldApi</span><span class="p">:</span>
     <span class="nt">Description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">API Gateway endpoint URL for Prod stage for Hello World function</span>
     <span class="nt">Value</span><span class="p">:</span>
       <span class="s">&#39;Fn::Sub&#39;</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;-</span>
@@ -745,7 +809,180 @@ Funcitonに対してTimeoutを3(秒)に設定しています｡このテンプ�
 </tr>
 </tbody>
 </table>
-<p>一件すると､作成されるリソースはLambda関数だけと捉えてしまいがちですが､<code>Events</code>で定義している為､API Gatewayも作成されます｡  </p>
+<p>一見すると､作成されるリソースはLambda関数だけと捉えてしまいがちですが､<code>Events</code>で定義している為､API Gatewayも作成されます｡  </p>
+<h3 id="outputs">Outputs</h3>
+<p>SAM内の変数や作成したリソースの名称などをエクスポートするのに使用します｡<br />
+例えば､2つのSAMが存在する際に､デプロイ済みの①のOutputsを②でParameterとして使用します｡<br />
+Outputsでエクスポートしておくと､各リソースのマネジメントコンソールを開かずに､CloudFormationのマネジメントコンソールから値の確認ができます｡<br />
+このSAMでは以下がOutputsに登録されています｡</p>
+<ul>
+<li>API Gatewayのエンドポイント名</li>
+<li>Lambda関数のARN(ユニークな識別子)</li>
+<li>Lambda関数のIAMロール(AWSリソースへのアクセス権限)</li>
+</ul>
+<h2 id="_8">テストの実行</h2>
+<p>用意ずみのテストを実行します｡  </p>
+<p>アプリのディレクトリに移動します｡</p>
+<div class="codehilite"><pre><span></span>~/environment/sam-app
+</pre></div>
+
+
+<p>必要なライブラリをインストールします｡</p>
+<div class="codehilite"><pre><span></span>pip install --user requests pytest pytest-mock
+</pre></div>
+
+
+<p>テストを実行します｡  </p>
+<div class="codehilite"><pre><span></span>python -m pytest tests/ -v
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>===================================================================== test session starts =====================================================================
+platform linux -- Python 3.6.8, pytest-5.1.2, py-1.8.0, pluggy-0.13.0 -- /usr/bin/python36
+cachedir: .pytest_cache
+rootdir: /home/ec2-user/environment/sam-app
+plugins: mock-1.10.4
+collected 1 item                                                                                                                                              
+
+tests/unit/test_handler.py::test_lambda_handler PASSED                                                                                                  [100%]
+
+====================================================================== 1 passed in 0.14s ======================================================================
+</pre></div>
+
+
+<h2 id="_9">デプロイ</h2>
+<p>アプリのディレクトリに移動します｡</p>
+<div class="codehilite"><pre><span></span>~/environment/sam-app
+</pre></div>
+
+
+<p>SAMのデプロイには<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/gsg/GetStartedWithS3.html" target="_blank">S3バケット <i class="fa fa-external-link"></i> </a>(AWSが提供するオブジェクトストレージ)が必要です｡<br />
+バケット名は全世界でユニークな必要があります｡なので､今回はバケット名に末尾に乱数を追加しています｡意図して名前をつける場合は､AWSアカウントIDを末尾に付ける事も良くあります｡  </p>
+<p>バケットの名前を生成します｡</p>
+<div class="codehilite"><pre><span></span><span class="nv">BUCKET_NAME</span><span class="o">=</span><span class="s2">&quot;sls-hands-on-</span><span class="k">$((</span><span class="nv">$RANDOM</span> <span class="o">*</span> <span class="nv">$RANDOM</span><span class="k">))</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">BUCKET_NAME</span><span class="si">}</span>
+</pre></div>
+
+
+<p>(例) </p>
+<div class="codehilite"><pre><span></span>sls-hands-on-841850128
+</pre></div>
+
+
+<p>S3バケットを作成します｡</p>
+<div class="codehilite"><pre><span></span>aws s3 mb s3://<span class="si">${</span><span class="nv">BUCKET_NAME</span><span class="si">}</span>
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>make_bucket: sls-hands-on-841850128
+</pre></div>
+
+
+<p>SAMをCloudFormationに変換します｡</p>
+<div class="codehilite"><pre><span></span>sam build
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>2019-09-19 08:46:39 Found credentials in shared credentials file: ~/.aws/credentials
+2019-09-19 08:46:39 Building resource &#39;HelloWorldFunction&#39;
+2019-09-19 08:46:40 Running PythonPipBuilder:ResolveDependencies
+2019-09-19 08:46:41 Running PythonPipBuilder:CopySource
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam/build
+Built Template   : .aws-sam/build/template.yaml
+
+Commands you can use next
+=========================
+[*] Invoke Function: sam local invoke
+[*] Package: sam package --s3-bucket &lt;yourbucket&gt;
+</pre></div>
+
+
+<p>Lambda関数のコードをS3バケットにアップロードします｡  </p>
+<div class="codehilite"><pre><span></span>sam package <span class="se">\</span>
+    --output-template packaged.yaml <span class="se">\</span>
+    --s3-bucket <span class="si">${</span><span class="nv">BUCKET_NAME</span><span class="si">}</span>
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>Uploading to 617dccc34fdbe3f07c70eeb7984ad0da  527086 / 527086.0  (100.00%)
+Successfully packaged artifacts and wrote output template to file packaged.yaml.
+Execute the following command to deploy the packaged template
+aws cloudformation deploy --template-file /home/ec2-user/environment/sam-app/packaged.yaml --stack-name &lt;YOUR STACK NAME&gt;
+</pre></div>
+
+
+<p>デプロイします｡  </p>
+<div class="codehilite"><pre><span></span>sam deploy <span class="se">\</span>
+    --stack-name lambda-tutorial-sample-app <span class="se">\</span>
+    --template-file ~/environment/sam-app/packaged.yaml <span class="se">\</span>
+    --capabilities CAPABILITY_IAM 
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>Waiting for changeset to be created..
+Waiting for stack create/update to complete
+Successfully created/updated stack - lambda-tutorial-sample-app
+</pre></div>
+
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>講師は参加者のデプロイが完了したタイミングで､デプロイが完了したCloudFormationスタックについて説明を行ってください｡  </p>
+<ul>
+<li>イベント</li>
+<li>リソース</li>
+<li>出力</li>
+<li>テンプレート<ul>
+<li>CodeUriが変換されている</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="api">API実行</h2>
+<p>エンドポイント名を確認します｡<code>OutputKey:HelloWorldApi</code>がエンドポイント名です｡</p>
+<div class="codehilite"><pre><span></span><span class="nv">SAMPLE_APP_ENDPOINT_NAME</span><span class="o">=</span><span class="k">$(</span>aws cloudformation describe-stacks --stack-name lambda-tutorial-sample-app --region ap-northeast-1 --query <span class="s1">&#39;Stacks[].Outputs[?OutputKey==`HelloWorldApi`].[OutputValue]&#39;</span> --output text<span class="k">)</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">SAMPLE_APP_ENDPOINT_NAME</span><span class="si">}</span>
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>https://obgtu7b8m9.execute-api.ap-northeast-1.amazonaws.com/Prod/hello/
+</pre></div>
+
+
+<p>APIをコールし動作を確認します｡ブラウザで開いても同様に表示される事を確認してください｡</p>
+<div class="codehilite"><pre><span></span>curl <span class="si">${</span><span class="nv">SAMPLE_APP_ENDPOINT_NAME</span><span class="si">}</span>
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>{&quot;message&quot;: &quot;hello world&quot;, &quot;location&quot;: &quot;13.114.141.65&quot;}% 
+</pre></div>
+
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>講師は参加者のAPI実行が完了したタイミングで､HTTPリクエストが処理される流れについて説明を行ってください｡  </p>
+<ol>
+<li>API Gateway Endpoint</li>
+<li>Lambda Fuction</li>
+<li>API Gateway Endpoint</li>
+</ol>
+</div>
+<h2 id="_10">削除</h2>
+<p>作成されたAWSリソースを削除します｡
+CloudFormationスタックを削除すると､作成されたAWSリソースも削除されます｡  </p>
+<div class="codehilite"><pre><span></span>aws cloudformation delete-stack --stack-name lambda-tutorial-sample-app
+aws cloudformation <span class="nb">wait</span> stack-delete-complete --stack-name lambda-tutorial-sample-app
+</pre></div>
                 
                   
                 

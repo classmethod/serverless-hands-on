@@ -232,6 +232,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#aws" class="md-nav__link">
+    AWSリージョンの設定
+  </a>
+  
+</li>
+      
       
       
       
@@ -323,6 +330,13 @@
         <li class="md-nav__item">
   <a href="#python3" class="md-nav__link">
     Python3のデフォルト設定
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws" class="md-nav__link">
+    AWSリージョンの設定
   </a>
   
 </li>
@@ -438,6 +452,33 @@ AWS CLIとAWS SAM CLIなどAWSを使った開発に必要なツールや基本�
 <p>(例)</p>
 <div class="codehilite"><pre><span></span><span class="n">Python</span> <span class="mi">3</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">8</span>
 <span class="n">pip</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">3</span> <span class="k">from</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="n">python</span> <span class="mi">3</span><span class="p">.</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="aws">AWSリージョンの設定</h2>
+<p>ハンズオンではAWS CLIを使い､コマンドラインでAWSを操作します｡<br />
+利用するAWSリージョンを指定する為に､環境変数を設定します｡  </p>
+<div class="codehilite"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;AWS_DEFAULT_REGION=&quot;ap-northeast-1&quot;&#39;</span> &gt;&gt; ~/.bashrc
+<span class="nb">source</span> ~/.bashrc
+</pre></div>
+
+
+<p>設定を確認します｡  </p>
+<div class="codehilite"><pre><span></span><span class="nb">echo</span> <span class="si">${</span><span class="nv">AWS_DEFAULT_REGION</span><span class="si">}</span>
+aws ec2 describe-instances --query <span class="se">\</span>
+    <span class="s1">&#39;sort_by(Reservations[].Instances[].{Tags:Tags[?Key==`Name`].Value|[0],InstanceType:InstanceType,State:State.Name},&amp;Tags)&#39;</span> --output table
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>ap-northeast-1
+-----------------------------------------------------------------------------------------
+|                                   DescribeInstances                                   |
++--------------+----------+-------------------------------------------------------------+
+| InstanceType |  State   |                            Tags                             |
++--------------+----------+-------------------------------------------------------------+
+|  t2.micro    |  running |  aws-cloud9-sls-hands-on-[Random alphanumeric]              |
++--------------+----------+-------------------------------------------------------------+
 </pre></div>
                 
                   
