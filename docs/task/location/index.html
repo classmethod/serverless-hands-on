@@ -36,7 +36,7 @@
     
     
       
-        <title>1. サンプルアプリケーションのデプロイ - Serverless ハンズオン</title>
+        <title>1. サーバーサイドのIPアドレスをレスポンスするAPI - Serverless ハンズオン</title>
       
     
     
@@ -83,7 +83,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#_1" tabindex="1" class="md-skip">
+      <a href="#ipapi" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -109,7 +109,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                1. サンプルアプリケーションのデプロイ
+                1. サーバーサイドのIPアドレスをレスポンスするAPI
               
             </span>
           
@@ -220,11 +220,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        1. サンプルアプリケーションのデプロイ
+        1. サーバーサイドのIPアドレスをレスポンスするAPI
       </label>
     
-    <a href="./" title="1. サンプルアプリケーションのデプロイ" class="md-nav__link md-nav__link--active">
-      1. サンプルアプリケーションのデプロイ
+    <a href="./" title="1. サーバーサイドのIPアドレスをレスポンスするAPI" class="md-nav__link md-nav__link--active">
+      1. サーバーサイドのIPアドレスをレスポンスするAPI
     </a>
     
       
@@ -236,6 +236,13 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    構成図
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
@@ -385,6 +392,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../create-metadata/" title="2. 画像をアップロードをトリガーにメタデータを保存する非同期アーキテクチャ" class="md-nav__link">
+      2. 画像をアップロードをトリガーにメタデータを保存する非同期アーキテクチャ
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -409,6 +428,13 @@
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    構成図
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
@@ -564,8 +590,11 @@
               
                 
                 
-                <h1 id="_1">サンプルアプリケーションのデプロイ</h1>
-<p>この課題ではサンプルのアプリケーションのコードを確認し､デプロイを行います｡  </p>
+                <h1 id="ipapi">サーバーサイドのIPアドレスをレスポンスするAPI</h1>
+<p>この課題ではSAMが用意しているサンプルのアプリケーションのコードを確認し､デプロイを行います｡<br />
+サンプルアプリにサーバーサイドのIPアドレスをレスポンスするAPIです｡  </p>
+<h2 id="_1">構成図</h2>
+<p><img alt="構成図" src="img/diagram.png" title="構成図" /></p>
 <h2 id="_2">サンプルアプリケーションの取得</h2>
 <p>作業ディレクトリに移動します｡</p>
 <div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/environment
@@ -857,29 +886,6 @@ tests/unit/test_handler.py::test_lambda_handler PASSED                          
 </pre></div>
 
 
-<p>SAMのデプロイには<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/gsg/GetStartedWithS3.html" target="_blank">S3バケット <i class="fa fa-external-link"></i> </a>(AWSが提供するオブジェクトストレージ)が必要です｡<br />
-バケット名は全世界でユニークな必要があります｡なので､今回はバケット名に末尾に乱数を追加しています｡意図して名前をつける場合は､AWSアカウントIDを末尾に付ける事も良くあります｡  </p>
-<p>バケットの名前を生成します｡</p>
-<div class="codehilite"><pre><span></span><span class="nv">BUCKET_NAME</span><span class="o">=</span><span class="s2">&quot;sls-hands-on-</span><span class="k">$((</span><span class="nv">$RANDOM</span> <span class="o">*</span> <span class="nv">$RANDOM</span><span class="k">))</span><span class="s2">&quot;</span>
-<span class="nb">echo</span> <span class="si">${</span><span class="nv">BUCKET_NAME</span><span class="si">}</span>
-</pre></div>
-
-
-<p>(例) </p>
-<div class="codehilite"><pre><span></span>sls-hands-on-841850128
-</pre></div>
-
-
-<p>S3バケットを作成します｡</p>
-<div class="codehilite"><pre><span></span>aws s3 mb s3://<span class="si">${</span><span class="nv">BUCKET_NAME</span><span class="si">}</span>
-</pre></div>
-
-
-<p>(例)</p>
-<div class="codehilite"><pre><span></span>make_bucket: sls-hands-on-841850128
-</pre></div>
-
-
 <p>SAMをCloudFormationに変換します｡</p>
 <div class="codehilite"><pre><span></span>sam build
 </pre></div>
@@ -906,7 +912,7 @@ Commands you can use next
 <p>Lambda関数のコードをS3バケットにアップロードします｡  </p>
 <div class="codehilite"><pre><span></span>sam package <span class="se">\</span>
     --output-template packaged.yaml <span class="se">\</span>
-    --s3-bucket <span class="si">${</span><span class="nv">BUCKET_NAME</span><span class="si">}</span>
+    --s3-bucket <span class="si">${</span><span class="nv">SAM_ARTIFACT_BUCKET</span><span class="si">}</span>
 </pre></div>
 
 
@@ -1017,6 +1023,20 @@ aws cloudformation <span class="nb">wait</span> stack-delete-complete --stack-na
             </div>
           </a>
         
+        
+          <a href="../create-metadata/" title="2. 画像をアップロードをトリガーにメタデータを保存する非同期アーキテクチャ" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                2. 画像をアップロードをトリガーにメタデータを保存する非同期アーキテクチャ
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>

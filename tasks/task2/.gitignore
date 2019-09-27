@@ -1,0 +1,11 @@
+# editor
+.idea/*
+
+# pipenv
+.venv/*
+
+# sam
+.packaged/*.yaml
+.aws-sam/*
+src/requirements.txt
+./template.yaml

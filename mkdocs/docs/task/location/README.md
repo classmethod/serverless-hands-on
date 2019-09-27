@@ -1,6 +1,11 @@
-# サンプルアプリケーションのデプロイ
+# サーバーサイドのIPアドレスをレスポンスするAPI
 
-この課題ではサンプルのアプリケーションのコードを確認し､デプロイを行います｡  
+この課題ではSAMが用意しているサンプルのアプリケーションのコードを確認し､デプロイを行います｡  
+サンプルアプリにサーバーサイドのIPアドレスをレスポンスするAPIです｡  
+
+## 構成図
+
+![構成図](img/diagram.png "構成図")
 
 ## サンプルアプリケーションの取得
 
@@ -283,29 +288,6 @@ tests/unit/test_handler.py::test_lambda_handler PASSED                          
 ~/environment/sam-app
 ```
 
-SAMのデプロイには<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/gsg/GetStartedWithS3.html" target="_blank">S3バケット :fa-external-link: </a>(AWSが提供するオブジェクトストレージ)が必要です｡  
-バケット名は全世界でユニークな必要があります｡なので､今回はバケット名に末尾に乱数を追加しています｡意図して名前をつける場合は､AWSアカウントIDを末尾に付ける事も良くあります｡  
-
-バケットの名前を生成します｡
-```bash
-BUCKET_NAME="sls-hands-on-$(($RANDOM * $RANDOM))"
-echo ${BUCKET_NAME}
-```
-
-(例) 
-```text
-sls-hands-on-841850128
-```
-
-S3バケットを作成します｡
-```bash
-aws s3 mb s3://${BUCKET_NAME}
-```
-(例)
-```text
-make_bucket: sls-hands-on-841850128
-```
-
 SAMをCloudFormationに変換します｡
 ```bash
 sam build
@@ -333,7 +315,7 @@ Lambda関数のコードをS3バケットにアップロードします｡
 ```bash
 sam package \
     --output-template packaged.yaml \
-    --s3-bucket ${BUCKET_NAME}
+    --s3-bucket ${SAM_ARTIFACT_BUCKET}
 ```
 
 (例)

@@ -233,8 +233,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pipenv" class="md-nav__link">
+    pipenvのインストール
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#aws" class="md-nav__link">
     AWSリージョンの設定
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sam" class="md-nav__link">
+    SAMアーティファクト用バケットの作成
   </a>
   
 </li>
@@ -275,8 +289,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../../task/sample-app/" title="1. サンプルアプリケーションのデプロイ" class="md-nav__link">
-      1. サンプルアプリケーションのデプロイ
+    <a href="../../task/location/" title="1. サーバーサイドのIPアドレスをレスポンスするAPI" class="md-nav__link">
+      1. サーバーサイドのIPアドレスをレスポンスするAPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../task/create-metadata/" title="2. 画像をアップロードをトリガーにメタデータを保存する非同期アーキテクチャ" class="md-nav__link">
+      2. 画像をアップロードをトリガーにメタデータを保存する非同期アーキテクチャ
     </a>
   </li>
 
@@ -335,8 +361,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pipenv" class="md-nav__link">
+    pipenvのインストール
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#aws" class="md-nav__link">
     AWSリージョンの設定
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sam" class="md-nav__link">
+    SAMアーティファクト用バケットの作成
   </a>
   
 </li>
@@ -450,8 +490,29 @@ AWS CLIとAWS SAM CLIなどAWSを使った開発に必要なツールや基本�
 
 
 <p>(例)</p>
-<div class="codehilite"><pre><span></span><span class="n">Python</span> <span class="mi">3</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">8</span>
-<span class="n">pip</span> <span class="mi">9</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">3</span> <span class="k">from</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="p">.</span><span class="mi">6</span><span class="o">/</span><span class="n">dist</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="n">python</span> <span class="mi">3</span><span class="p">.</span><span class="mi">6</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span>Python 3.6.8
+pip 9.0.3 from /usr/lib/python3.6/dist-packages (python 3.6)
+</pre></div>
+
+
+<h2 id="pipenv">pipenvのインストール</h2>
+<p>一部の課題ではpipenvを使ってライブラリの管理を行います｡その為､pipenvをインストールします｡</p>
+<div class="codehilite"><pre><span></span>pip install --user pipenv
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>Collecting pipenv
+  Using cached https://files.pythonhosted.org/packages/13/b4/3ffa55f77161cff9a5220f162670f7c5eb00df52e00939e203f601b0f579/pipenv-2018.11.26-py3-none-any.whl
+Requirement already satisfied: virtualenv in /usr/local/lib/python3.6/site-packages (from pipenv)
+Requirement already satisfied: virtualenv-clone&gt;=0.2.5 in /usr/local/lib/python3.6/site-packages (from pipenv)
+Requirement already satisfied: pip&gt;=9.0.1 in /usr/lib/python3.6/dist-packages (from pipenv)
+Requirement already satisfied: setuptools&gt;=36.2.1 in /usr/lib/python3.6/dist-packages (from pipenv)
+Requirement already satisfied: certifi in /home/ec2-user/.local/lib/python3.6/site-packages (from pipenv)
+Installing collected packages: pipenv
+Successfully installed pipenv-2018.11.26
+You are using pip version 9.0.3, however version 19.2.3 is available.
+You should consider upgrading via the &#39;pip install --upgrade pip&#39; command.
 </pre></div>
 
 
@@ -480,6 +541,37 @@ aws ec2 describe-instances --query <span class="se">\</span>
 |  t2.micro    |  running |  aws-cloud9-sls-hands-on-[Random alphanumeric]              |
 +--------------+----------+-------------------------------------------------------------+
 </pre></div>
+
+
+<h2 id="sam">SAMアーティファクト用バケットの作成</h2>
+<p>SAMについては後ほど課題の中で説明します｡
+SAMのデプロイには<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/gsg/GetStartedWithS3.html" target="_blank">S3バケット <i class="fa fa-external-link"></i> </a>(AWSが提供するオブジェクトストレージ)が必要です｡<br />
+バケット名は全世界でユニークな必要があります｡なので､今回はバケット名に末尾に乱数を追加しています｡意図して名前をつける場合は､AWSアカウントIDを末尾に付ける事も良くあります｡  </p>
+<p>バケットの名前を生成します｡</p>
+<div class="codehilite"><pre><span></span><span class="nv">SAM_ARTIFACTS_BUCKET</span><span class="o">=</span><span class="s2">&quot;sls-hands-on-</span><span class="k">$((</span><span class="nv">$RANDOM</span> <span class="o">*</span> <span class="nv">$RANDOM</span><span class="k">))</span><span class="s2">&quot;</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">SAM_ARTIFACT_BUCKET</span><span class="si">}</span>
+</pre></div>
+
+
+<p>(例) </p>
+<div class="codehilite"><pre><span></span>sls-hands-on-841850128
+</pre></div>
+
+
+<p>S3バケットを作成します｡</p>
+<div class="codehilite"><pre><span></span>aws s3 mb s3://<span class="si">${</span><span class="nv">SAM_ARTIFACT_BUCKET</span><span class="si">}</span>
+</pre></div>
+
+
+<p>(例)</p>
+<div class="codehilite"><pre><span></span>make_bucket: sls-hands-on-841850128
+</pre></div>
+
+
+<p>別のターミナルに切り替えても環境変数を引き継げるように永続化します｡</p>
+<div class="codehilite"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;SAM_ARTIFACT_BUCKET=</span><span class="si">${</span><span class="nv">SAM_ARTIFACT_BUCKET</span><span class="si">}</span><span class="s2">&quot;</span> &gt;&gt; ~/.bashrc
+<span class="nb">source</span> ~/.bashrc
+</pre></div>
                 
                   
                 
@@ -501,13 +593,13 @@ aws ec2 describe-instances --query <span class="se">\</span>
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="../../task/sample-app/" title="1. サンプルアプリケーションのデプロイ" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../task/location/" title="1. サーバーサイドのIPアドレスをレスポンスするAPI" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                1. サンプルアプリケーションのデプロイ
+                1. サーバーサイドのIPアドレスをレスポンスするAPI
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

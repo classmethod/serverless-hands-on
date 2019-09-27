@@ -84,9 +84,31 @@ python --version
 pip --version
 ```
 (例)
-```
+```text
 Python 3.6.8
 pip 9.0.3 from /usr/lib/python3.6/dist-packages (python 3.6)
+```
+
+## pipenvのインストール
+
+一部の課題ではpipenvを使ってライブラリの管理を行います｡その為､pipenvをインストールします｡
+
+```bash
+pip install --user pipenv
+```
+(例)
+```text
+Collecting pipenv
+  Using cached https://files.pythonhosted.org/packages/13/b4/3ffa55f77161cff9a5220f162670f7c5eb00df52e00939e203f601b0f579/pipenv-2018.11.26-py3-none-any.whl
+Requirement already satisfied: virtualenv in /usr/local/lib/python3.6/site-packages (from pipenv)
+Requirement already satisfied: virtualenv-clone>=0.2.5 in /usr/local/lib/python3.6/site-packages (from pipenv)
+Requirement already satisfied: pip>=9.0.1 in /usr/lib/python3.6/dist-packages (from pipenv)
+Requirement already satisfied: setuptools>=36.2.1 in /usr/lib/python3.6/dist-packages (from pipenv)
+Requirement already satisfied: certifi in /home/ec2-user/.local/lib/python3.6/site-packages (from pipenv)
+Installing collected packages: pipenv
+Successfully installed pipenv-2018.11.26
+You are using pip version 9.0.3, however version 19.2.3 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
 ```
 
 ## AWSリージョンの設定
@@ -115,4 +137,36 @@ ap-northeast-1
 +--------------+----------+-------------------------------------------------------------+
 |  t2.micro    |  running |  aws-cloud9-sls-hands-on-[Random alphanumeric]              |
 +--------------+----------+-------------------------------------------------------------+
+```
+
+## SAMアーティファクト用バケットの作成
+
+SAMについては後ほど課題の中で説明します｡
+SAMのデプロイには<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/gsg/GetStartedWithS3.html" target="_blank">S3バケット :fa-external-link: </a>(AWSが提供するオブジェクトストレージ)が必要です｡  
+バケット名は全世界でユニークな必要があります｡なので､今回はバケット名に末尾に乱数を追加しています｡意図して名前をつける場合は､AWSアカウントIDを末尾に付ける事も良くあります｡  
+
+バケットの名前を生成します｡
+```bash
+SAM_ARTIFACTS_BUCKET="sls-hands-on-$(($RANDOM * $RANDOM))"
+echo ${SAM_ARTIFACT_BUCKET}
+```
+
+(例) 
+```text
+sls-hands-on-841850128
+```
+
+S3バケットを作成します｡
+```bash
+aws s3 mb s3://${SAM_ARTIFACT_BUCKET}
+```
+(例)
+```text
+make_bucket: sls-hands-on-841850128
+```
+
+別のターミナルに切り替えても環境変数を引き継げるように永続化します｡
+```bash
+echo "SAM_ARTIFACT_BUCKET=${SAM_ARTIFACT_BUCKET}" >> ~/.bashrc
+source ~/.bashrc
 ```

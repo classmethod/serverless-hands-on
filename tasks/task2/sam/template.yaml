@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  LambdaLogGroupNamePrefix:
+    Type: String
+    Default: /aws/lambda
+
+Globals:
+  Function:
+    Runtime: python3.7
+    Timeout: 30
+    MemorySize: 512
+    # どちらの値もLambdaでよく使うのでGlobalsに定義
+    Environment:
+      Variables:
+        DATA_TABLE_NAME: !Ref DataTable
+
+Resources:
+
+  # metadataを保存するTable。
+  # 同一アカウント、同一リージョン内で一意にしないといけないので、名前は自動生成させる
+  DataTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+    # TODO: プライマリキーをString型のidという名前で定義します｡
+    # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable:
+
+  # 画像を保存するBucket
+  # 全世界で一意である必要があるので、名前は自動生成させる
+  DataBucket:
+    Type: AWS::S3::Bucket
+
+  CreateMetadataFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../src
+      Handler: index.handler
+      Policies:
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+      Events:
+        ObjectCreated:
+        # TODO: S3バケットにオブジェクトが作成された時にLambda関数を実行します｡
+        # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#s3
+
+  # Lambdaのログ出力先
+  # 明示的に作成する事で､スタック削除時にログが削除される(継続的に課金されない)
+  CreateMetadataLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub ${LambdaLogGroupNamePrefix}/${CreateMetadataFunction}
+
+Outputs:
+  LambdaFunction:
+    Value: !Ref CreateMetadataFunction
+  DataBucketName:
+    Value: !Ref DataBucket
+  MetadataTableName:
+    Value: !Ref DataTable
